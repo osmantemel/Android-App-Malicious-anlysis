@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seçenekler ve Değerler Alanı</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Seçenekler ve Değerler Alanı</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="secimSayisi" class="form-label">Seçim Sayısı:</label>
+        <input type="number" id="secimSayisi" class="form-control" min="1" value="1">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <button id="olusturButonu" class="btn btn-primary">Oluştur</button>
+      </div>
+    </div>
+    <div id="secimAlanlari" class="d-none"></div>
+    <button class="btn btn-primary" id="degerleriAl">SONUÇ</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
