@@ -1,5 +1,8 @@
-import model
+from model import AiEgitimSonuc
 
-a=model.ai_eğitim_sonuc()
+ai_egitim_sonucu = AiEgitimSonuc('/home/osman/Documents/projeler/Android-App-Malicious-anlysis/datasets/drebin-215-dataset-5560malware-9476-benign.csv')
 
-print(a)
+ai_egitim_sonucu.model_LR()
+
+en_iyi_model, en_iyi_model_accuracy = ai_egitim_sonucu.en_iyi_model_ve_accuracy()
+print(f"En iyi model: {en_iyi_model}, Accuracy: {en_iyi_model_accuracy}")
