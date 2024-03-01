@@ -2,3 +2,5 @@
 * Kullanılan Modeller | Models Used : LogisticRegression , SVC,DecisionTreeClassifier,RandomForestClassifier,MLPClassifier GaussianNB
 
 * En İyi Sonuç veren modeller | The model that gives the best results: DecisionTreeClassifier,RandomForestClassifier
+
+modelLR, modelSVM,modelDT,modelRF,modelMLP,modelGNB
