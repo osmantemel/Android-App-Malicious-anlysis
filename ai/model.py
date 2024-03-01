@@ -24,9 +24,7 @@ class AiEgitimSonuc:
     def _model_egit(self, model, model_ad,secilen_degerler):
         
         secilen_degerler_df = pd.DataFrame(secilen_degerler)    
-        print("secilen_degerler_df",secilen_degerler_df.shape) 
         secilen_degerler_df=secilen_degerler_df.T  
-        # print("secilen_degerler_df",secilen_degerler_df) 
         secilen_degerler_df = secilen_degerler_df.fillna(0)
         current_rows, current_cols = secilen_degerler_df.shape
         target_rows = 3008
@@ -35,43 +33,51 @@ class AiEgitimSonuc:
             num_rows_to_add = target_rows - current_rows
             extension_df = pd.DataFrame(0, index=range(num_rows_to_add), columns=secilen_degerler_df.columns)
             secilen_degerler_df = pd.concat([secilen_degerler_df, extension_df])
-        print("secilen_degerler_df: ",secilen_degerler_df.shape)       
         
         secilen_degerler_df.columns = self.X_test.columns
         secilen_degerler_df.index = self.X_test.index
-        print(secilen_degerler_df)
 
         
         model.fit(self.X_train, self.y_train)
         y_pred = model.predict(self.X_test)
-        print( "X_train" ,self.X_train.shape)
-        print("X_test",self.X_test.shape)
         accuracy = accuracy_score(self.y_test, y_pred)
         self.TumSonuclar[model_ad] = accuracy
-
+        y_pred_gercek = model.predict(secilen_degerler_df)
+        return y_pred_gercek
+    
     def model_LR(self,secilen_degerler):
         model_LR = LogisticRegression()
-        self._model_egit(model_LR, "model_LR",secilen_degerler)
+        y_pred=self._model_egit(model_LR, "model_LR",secilen_degerler)
+        return y_pred
 
     def model_SVM(self,secilen_degerler):
         model_SVM = SVC()
-        self._model_egit(model_SVM, "model_SVM",secilen_degerler)
+        y_pred=self._model_egit(model_SVM, "model_SVM",secilen_degerler)
+        return y_pred
 
     def model_DT(self,secilen_degerler):
         model_DT = DecisionTreeClassifier()
-        self._model_egit(model_DT, "model_DT",secilen_degerler)
+        y_pred=self._model_egit(model_DT, "model_DT",secilen_degerler)
+        return y_pred
+        
 
     def model_RF(self,secilen_degerler):
         model_RF = RandomForestClassifier()
-        self._model_egit(model_RF, "model_RF",secilen_degerler)
+        y_pred=self._model_egit(model_RF, "model_RF",secilen_degerler)
+        return y_pred
+        
 
     def model_MLP(self,secilen_degerler):
         model_MLP = MLPClassifier()
-        self._model_egit(model_MLP, "model_MLP",secilen_degerler)
+        y_pred=self._model_egit(model_MLP, "model_MLP",secilen_degerler)
+        return y_pred
+        
 
     def model_GNB(self,secilen_degerler):
         model_GNB = GaussianNB()
-        self._model_egit(model_GNB, "model_GNB",secilen_degerler)
+        y_pred=self._model_egit(model_GNB, "model_GNB",secilen_degerler)
+        return y_pred
+        
 
     def en_iyi_model_ve_accuracy(self):
         en_iyi_model_ad = max(self.TumSonuclar, key=self.TumSonuclar.get)

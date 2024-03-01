@@ -232,3 +232,4 @@ const veriGonder = async (secilenOzellikler, secilenDegerler) => {
   }
 };
 
+
