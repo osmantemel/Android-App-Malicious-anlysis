@@ -9,13 +9,17 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 
 class AiEgitimSonuc:
-    def __init__(self, data_path):
+    def __init__(self, data_path,secilen_ozellikler, secilen_degerler):
         self.TumSonuclar = {}
+        self.veriseti_ayarla(data_path,secilen_ozellikler, secilen_degerler)
+       
+    def veriseti_ayarla(self, data_path,secilen_ozellikler, secilen_degerler):
         self.data = pd.read_csv(data_path)
         self.data = self.data.drop('TelephonyManager.getSimCountryIso', axis=1)
         self.y = self.data["class"]
-        self.X = self.data.drop("class", axis=1)
+        self.X = self.data[secilen_ozellikler]
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
+
 
     def _model_egit(self, model, model_ad):
         model.fit(self.X_train, self.y_train)
@@ -51,5 +55,4 @@ class AiEgitimSonuc:
         en_iyi_model_ad = max(self.TumSonuclar, key=self.TumSonuclar.get)
         en_iyi_model_accuracy = self.TumSonuclar[en_iyi_model_ad]
         return en_iyi_model_ad, en_iyi_model_accuracy
-
 
