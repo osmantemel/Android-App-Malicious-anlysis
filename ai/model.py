@@ -19,7 +19,10 @@ class AiEgitimSonuc:
         self.y = self.data["class"]
         self.X = self.data[secilen_ozellikler]
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
-
+        print( "x train shape: ",self.X_train.shape)
+        print( "y train shape: ",self.y_train.shape)
+        print( "x test shape: ",self.X_test.shape)
+        print( "y test shape: ",self.y_test.shape)
 
     def _model_egit(self, model, model_ad,secilen_degerler):
         
@@ -33,8 +36,9 @@ class AiEgitimSonuc:
             num_rows_to_add = target_rows - current_rows
             extension_df = pd.DataFrame(0, index=range(num_rows_to_add), columns=secilen_degerler_df.columns)
             secilen_degerler_df = pd.concat([secilen_degerler_df, extension_df])
-        
+        print("secilen değerler :",secilen_degerler_df.shape)
         secilen_degerler_df.columns = self.X_test.columns
+        
         secilen_degerler_df.index = self.X_test.index
 
         

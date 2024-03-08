@@ -225,11 +225,40 @@ const veriGonder = async (secilenOzellikler, secilenDegerler) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log('Gelen Veri:', data);
+    const responseData = await response.json();
+
+    if (responseData && responseData.response) {
+      const data = JSON.parse(responseData.response);
+
+      console.log('Gelen Veri:', data);
+
+      if (Array.isArray(data) && data.length >= 3) {
+        verileri_ekrana_yansit(data);
+      } else {
+        console.error('Hatalı veri formatı.');
+      }
+    } else {
+      console.error('Hatalı veri formatı.');
+    }
   } catch (error) {
     console.error('Hata:', error);
   }
 };
 
 
+const verileri_ekrana_yansit = (data) => {
+  try {
+    // 'sonuclar' ID'li div elementini seç
+    console.log("verileri_ekrana_yansit çalışıt")
+    var sonuclarDiv = document.getElementById('sonuclar');
+
+    // Verileri HTML içine ekleyerek div içeriğini güncelle
+    sonuclarDiv.innerHTML = `
+      <p>Model: ${data[0]}</p>
+      <p>Accuracy: ${data[1]}</p>
+      <p>Labels: ${data[2]}</p>
+    `;
+  } catch (error) {
+    console.error('Hata:', error);
+  }
+};

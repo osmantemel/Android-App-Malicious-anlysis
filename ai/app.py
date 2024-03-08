@@ -19,9 +19,22 @@ def receive_data():
         data_path = '/home/osman/Documents/projeler/Android-App-Malicious-anlysis/datasets/drebin-215-dataset-5560malware-9476-benign.csv'
         yapayZeka(secilen_ozellikler, secilen_degerler, data_path)
         print(type(TumSonuclar1))
- 
+        print("0:",TumSonuclar1[0])
+        print("1:",TumSonuclar1[1])
+        print("2:",TumSonuclar1[2])
+                # Örnek veri
+        model_name = TumSonuclar1[0]
+        accuracy = TumSonuclar1[1]
+        labels = TumSonuclar1[2]
 
-        return jsonify({'response':"TumSonuclar1"})
+        # NumPy dizisini Python listesine dönüştürme
+        labels_list = labels.tolist()
+
+        # JSON olarak seri hale getirme
+        result = [model_name, accuracy, labels_list]
+        json_result = json.dumps(result)
+
+        return jsonify({'response':json_result})
     except Exception as e:
         print(f'Hata: {str(e)}')
         return jsonify({'error': f'Hata: {str(e)}'}), 500
